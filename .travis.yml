@@ -11,3 +11,13 @@ before_script:
 script:
   - php artisan key:generate
   - vendor/bin/phpunit
+
+notifications:
+  webhooks:
+    urls:
+      - $FORGE_URL
+    on_success: always # default: always
+    on_failure: never # default: always
+    on_start: never   # default: never
+    on_cancel: never # default: always
+    on_error: never # default: always
