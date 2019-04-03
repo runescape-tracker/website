@@ -1,9 +1,13 @@
 {
-    "name": "laravel/laravel",
+    "name": "runescape-tracker/website",
     "type": "project",
-    "description": "The Laravel Framework.",
+    "description": "runescape-tracker.com website.",
     "keywords": [
-        "framework",
+        "runescape-tracker",
+        "tracker",
+        "runescape-hiscores",
+        "runescape-hiscores-tracker",
+        "php",
         "laravel"
     ],
     "license": "MIT",
