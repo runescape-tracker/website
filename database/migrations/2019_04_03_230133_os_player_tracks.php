@@ -19,6 +19,7 @@ class OsPlayerTracks extends Migration
 
         Schema::create('os_player_tracks', function (Blueprint $table) use ($skillsList, $activitiesList) {
             $table->bigIncrements('id');
+            $table->integer('player_id')->unsigned();
 
             foreach ($skillsList as $index => $skill) {
                 $table->integer($this->clearNames($skill) . "_xp");

@@ -18,18 +18,19 @@ class CreateTableRs3PlayerTracks extends Migration
 
         Schema::create('rs3_player_tracks', function (Blueprint $table) use($skillsList, $activitiesList){
             $table->bigIncrements('id');
+            $table->integer('player_id')->unsigned();
 
             foreach ($skillsList as $index => $skill)
             {
-                $table->integer($this->clearNames($skill) . "_xp");
-                $table->integer($this->clearNames($skill) . "_rank");
-                $table->integer($this->clearNames($skill) . "_level");
+                $table->integer($this->clearNames($skill) . "_xp")->default(0);
+                $table->integer($this->clearNames($skill) . "_rank")->default(0);
+                $table->integer($this->clearNames($skill) . "_level")->default(0);
             }
 
             foreach ($activitiesList as $index => $activity)
             {
-                $table->integer($this->clearNames($activity) . "_rank");
-                $table->integer($this->clearNames($activity) . "_total");
+                $table->integer($this->clearNames($activity) . "_rank")->default(0);
+                $table->integer($this->clearNames($activity) . "_total")->default(0);
             }
 
             $table->timestamps();

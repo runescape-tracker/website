@@ -13,7 +13,7 @@ class RS3ProfileController extends Controller
 
         $player = RS3Player::whereRsn($rsn)->first();
 
-        if(!$player->exists())
+        if(!$player)
             abort('404', 'user_not_found');
 
         return view('profile.rs3.index', compact('player', 'rsn'));

@@ -29,7 +29,7 @@ class Kernel extends ConsoleKernel
         //          ->hourly();
 
         $schedule->job(new UpdateTrackedUsers())
-                 ->everyFiveMinutes();
+                 ->everyMinute();
     }
 
     /**
