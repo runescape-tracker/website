@@ -37,22 +37,29 @@ class UpdateTrackedUsers implements ShouldQueue
 
         foreach($p->cursor() as $player) {
 
-            $hiscore = new \RunescapeTracker\RunescapePlayerApi\RS3Player($player->rsn);
-            $hiscore->getHiscore();
-
-            $rs3Track = new RS3PlayerTrack();
-            $rs3Track->player_id = $player->id;
-
-            foreach($hiscore->player()['skills'] as $skill => $rankings)
-            {
-                $rs3Track->{strtolower($skill) . "_rank"} = $rankings['rank'] === "-1" ? 0 : $rankings['rank'];
-                $rs3Track->{strtolower($skill) . "_level"} = $rankings['level'] === "-1" ? 0 : $rankings['level'];
-                $rs3Track->{strtolower($skill) . "_xp"} = $rankings['experience'] === "-1" ? 0 : $rankings['experience'];
-            }
-
-            $rs3Track->save();
-
+            $this->handleTrack($player);
 
         };
+    }
+
+    private function handleTrack($player)
+    {
+        $hiscore = new \RunescapeTracker\RunescapePlayerApi\RS3Player($player->rsn);
+        $hiscore->getHiscore();
+
+        $rs3Track = new RS3PlayerTrack();
+        $rs3Track->player_id = $player->id;
+
+        foreach($hiscore->player()['skills'] as $skill => $rankings)
+        {
+            $rs3Track->{strtolower($skill) . "_rank"} = $rankings['rank'] === "-1" ? 0 : $rankings['rank'];
+            $rs3Track->{strtolower($skill) . "_level"} = $rankings['level'] === "-1" ? 0 : $rankings['level'];
+            $rs3Track->{strtolower($skill) . "_xp"} = $rankings['experience'] === "-1" ? 0 : $rankings['experience'];
+        }
+
+        $rs3Track->save();
+
+        $player->next_track = (new Carbon())->addSeconds($player->interval);
+        $player->save();
     }
 }

@@ -17,6 +17,7 @@ class Rs3Players extends Migration
         {
             $blueprint->increments('id');
             $blueprint->string('rsn');
+            $blueprint->integer('interval')->default(600);
             $blueprint->dateTime('next_track')->nullable();
             $blueprint->timestamps();
         });

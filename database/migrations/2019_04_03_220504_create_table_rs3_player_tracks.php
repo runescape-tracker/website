@@ -22,7 +22,7 @@ class CreateTableRs3PlayerTracks extends Migration
 
             foreach ($skillsList as $index => $skill)
             {
-                $table->integer($this->clearNames($skill) . "_xp")->default(0);
+                $table->bigInteger($this->clearNames($skill) . "_xp")->default(0);
                 $table->integer($this->clearNames($skill) . "_rank")->default(0);
                 $table->integer($this->clearNames($skill) . "_level")->default(0);
             }

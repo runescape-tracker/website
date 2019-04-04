@@ -22,7 +22,7 @@ class OsPlayerTracks extends Migration
             $table->integer('player_id')->unsigned();
 
             foreach ($skillsList as $index => $skill) {
-                $table->integer($this->clearNames($skill) . "_xp");
+                $table->bigInteger($this->clearNames($skill) . "_xp");
                 $table->integer($this->clearNames($skill) . "_rank");
                 $table->integer($this->clearNames($skill) . "_level");
             }
