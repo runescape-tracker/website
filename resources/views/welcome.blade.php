@@ -1,93 +1,41 @@
-<!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('app')
 
-        <title>Laravel</title>
+@section('content')
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
+    <div class="full-page-container align-items-center justify-content-center flex-column">
+        <div>
 
-            .full-height {
-                height: 100vh;
-            }
+            <h1 class="mb-5">Runescape Tracker</h1>
 
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
+            <form action="/track" method="POST" class="mb-3" style="width: 400px;">
+                @csrf
+                <div class="input-group w-100 mb-3">
+                    <input type="text" name="rsn" class="form-control form-control-lg @if($errors->get('rsn')) is-invalid @endif" placeholder="Your RSN">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="submit" id="track">Start Tracking</button>
+                    </div>
+                    <div class="invalid-feedback">
+                        Please choose a username.
+                    </div>
 
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
                 </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Runescape Tracker
+                <div>
+                    <div class="input-group">
+                        <label class="mr-4">
+                            <input type="radio" name="game" value="rs3" @if(old('game') !== 'os') checked @endif> RS3
+                        </label>
+                        <label>
+                            <input type="radio" name="game" value="os" @if(old('game') === 'os') checked @endif> Old School
+                        </label>
+                    </div>
                 </div>
 
-                <div class="links">
-                    <a href="https://github.com/runescape-tracker">GitHub</a>
-                </div>
-            </div>
+            </form>
         </div>
-    </body>
-</html>
+        <div class="links">
+            <a href="https://github.com/runescape-tracker">GitHub</a>
+        </div>
+    </div>
+
+@endsection

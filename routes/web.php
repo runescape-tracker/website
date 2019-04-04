@@ -14,3 +14,10 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::post('track', 'TrackingController@track');
+
+Route::get('rs3/{rsn}', 'RS3ProfileController@index')
+     ->name('profile.rs3');
+
+Route::get('os/{rsn}', 'OSProfileController@index')
+     ->name('profile.os');
