@@ -6,6 +6,7 @@ use App\Http\Requests\TrackRequest;
 use App\OSPlayer;
 use App\RS3Player;
 use App\Traits\GameTypes;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class TrackingController extends Controller
@@ -24,6 +25,7 @@ class TrackingController extends Controller
             {
                 $found = new RS3Player();
                 $found->rsn = $track;
+                $found->next_track = Carbon::now();
                 $found->save();
             }
 
@@ -37,6 +39,7 @@ class TrackingController extends Controller
             {
                 $found = new OSPlayer();
                 $found->rsn = $track;
+                $found->next_track = Carbon::now();
                 $found->save();
             }
         }

@@ -31,14 +31,10 @@ class UpdateTrackedUsers implements ShouldQueue
      */
     public function handle()
     {
-
-        $p = RS3Player::where('next_track', '<', Carbon::now())
-                      ->orWhereNull('next_track');
+        $p = RS3Player::where('next_track', '<', Carbon::now());
 
         foreach($p->cursor() as $player) {
-
             $this->handleTrack($player);
-
         };
     }
 
@@ -52,9 +48,9 @@ class UpdateTrackedUsers implements ShouldQueue
 
         foreach($hiscore->player()['skills'] as $skill => $rankings)
         {
-            $rs3Track->{strtolower($skill) . "_rank"} = $rankings['rank'] === "-1" ? 0 : $rankings['rank'];
-            $rs3Track->{strtolower($skill) . "_level"} = $rankings['level'] === "-1" ? 0 : $rankings['level'];
-            $rs3Track->{strtolower($skill) . "_xp"} = $rankings['experience'] === "-1" ? 0 : $rankings['experience'];
+            $rs3Track->{normalise_rs($skill) . "_rank"} = $rankings['rank'] === "-1" ? 0 : $rankings['rank'];
+            $rs3Track->{normalise_rs($skill) . "_level"} = $rankings['level'] === "-1" ? 0 : $rankings['level'];
+            $rs3Track->{normalise_rs($skill) . "_xp"} = $rankings['experience'] === "-1" ? 0 : $rankings['experience'];
         }
 
         $rs3Track->save();

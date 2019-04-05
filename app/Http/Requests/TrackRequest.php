@@ -29,7 +29,11 @@ class TrackRequest extends FormRequest
                 'required',
                 'min:1',
                 'max: 12',
-                'alphanum'
+                function($attribute, $value, $fail) {
+                    if((bool) preg_match('/^[a-z0-9\-_ ]{1,12}$/i', $value) === false) {
+                        $fail("Invalid RSN");
+                    }
+                }
             ],
             'game'  =>  [
                 'required',

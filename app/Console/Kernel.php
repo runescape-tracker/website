@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Jobs\UpdateRS3CachedTracks;
 use App\Jobs\UpdateTrackedUsers;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -27,7 +28,7 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
-
+        
         $schedule->job(new UpdateTrackedUsers())
                  ->everyMinute();
     }

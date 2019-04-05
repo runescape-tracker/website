@@ -22,32 +22,19 @@ class CreateTableRs3PlayerTracks extends Migration
 
             foreach ($skillsList as $index => $skill)
             {
-                $table->bigInteger($this->clearNames($skill) . "_xp")->default(0);
-                $table->integer($this->clearNames($skill) . "_rank")->default(0);
-                $table->integer($this->clearNames($skill) . "_level")->default(0);
+                $table->bigInteger(normalise_rs($skill) . "_xp")->default(0);
+                $table->integer(normalise_rs($skill) . "_rank")->default(0);
+                $table->integer(normalise_rs($skill) . "_level")->default(0);
             }
 
             foreach ($activitiesList as $index => $activity)
             {
-                $table->integer($this->clearNames($activity) . "_rank")->default(0);
-                $table->integer($this->clearNames($activity) . "_total")->default(0);
+                $table->integer(normalise_rs($activity) . "_rank")->default(0);
+                $table->integer(normalise_rs($activity) . "_total")->default(0);
             }
 
             $table->timestamps();
         });
-    }
-
-
-
-    private function clearNames($name)
-    {
-        $name = strtolower($name);
-        $name = str_ireplace([
-            '.',
-            ':',
-        ], '', $name);
-        $name = str_ireplace(' ', '_', $name);
-        return $name;
     }
 
     /**
