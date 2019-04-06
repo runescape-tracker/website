@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'WelcomeController@index');
 Route::post('track', 'TrackingController@track');
 
 Route::get('rs3/{rsn}', 'RS3ProfileController@index')

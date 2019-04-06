@@ -6,7 +6,8 @@
     <div class="full-page-container align-items-center justify-content-center flex-column">
         <div>
 
-            <h1 class="mb-5">Runescape Tracker</h1>
+            <h1>Runescape Tracker</h1>
+            <p>Tracking {{ number_format($trackingUsersCount) }} users</p>
 
             <form action="/track" method="POST" class="mb-3" style="width: 400px;">
                 @csrf
@@ -25,9 +26,9 @@
                         <label class="mr-4">
                             <input type="radio" name="game" value="rs3" @if(old('game') !== 'os') checked @endif> RS3
                         </label>
-                        <label>
-                            <input type="radio" name="game" value="os" @if(old('game') === 'os') checked @endif> Old School
-                        </label>
+{{--                        <label>--}}
+{{--                            <input type="radio" name="game" value="os" @if(old('game') === 'os') checked @endif> Old School--}}
+{{--                        </label>--}}
                     </div>
                 </div>
 
