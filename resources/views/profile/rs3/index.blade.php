@@ -23,9 +23,15 @@
             @foreach($skills as $skill)
                 <tr>
                     <td>{{ $skill }}</td>
-                    <td>{{ $currentTrack->{strtolower($skill) . "_level"} }}</td>
-                    <td>{{ $currentTrack->{strtolower($skill) . "_xp"} }}</td>
-                    <td>{{ $currentTrack->{strtolower($skill) . "_rank"} }}</td>
+                    @if(!$currentTrack)
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    @else
+                        <td>{{ $currentTrack->{strtolower($skill) . "_level"} }}</td>
+                        <td>{{ $currentTrack->{strtolower($skill) . "_xp"} }}</td>
+                        <td>{{ $currentTrack->{strtolower($skill) . "_rank"} }}</td>
+                    @endif
                     @if(!$yesterdayTrack)
                         <td>-</td>
                         <td>--</td>
